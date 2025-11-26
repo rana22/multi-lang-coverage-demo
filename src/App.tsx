@@ -9,7 +9,7 @@ const App: React.FC = () => {
   const [filter, setFilter] = React.useState('');
 
   React.useEffect(() => {
-    fetch('/coverage-summary.json')
+    fetch(`${import.meta.env.BASE_URL}coverage-summary.json`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load coverage-summary.json');
         return res.json();
