@@ -5,6 +5,6 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverage: true,
-  coverageReporters: ['lcov', 'text'],
+  coverageReporters: ['lcov', 'text', 'json-summary'],
   coverageDirectory: 'coverage'
 };
