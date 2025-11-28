@@ -2,17 +2,20 @@ import React from 'react';
 import { COVERAGE_SOURCES } from './config/projects';
 import { ProjectCoverageCard } from './components/ProjectCoverageCard';
 
+export interface CoverageMetrics {
+  lines?: number;
+  statements?: number;
+  branches?: number;
+  functions?: number;
+}
+
 interface CoveragePayload {
   projectId: string;
   name: string;
   language: string;
   repo: string;
-  coverage: {
-    lines: number;
-    statements: number;
-    branches: number;
-    functions: number;
-  };
+  reportUrl?: string;     // link to HTML coverage report
+  coverage: CoverageMetrics;
   generatedAt?: string;
   commit?: string;
   total: any
