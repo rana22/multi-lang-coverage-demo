@@ -10,6 +10,7 @@ export interface ProjectCoverage {
   name: string;
   repo: string;
   coverage: CoverageMetrics;
+  total: any;
 }
 
 export interface CoverageSummary {
