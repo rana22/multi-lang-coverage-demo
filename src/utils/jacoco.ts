@@ -1,6 +1,6 @@
 import { CoverageMetrics } from "../types";
 
-function parseJacocoXml(xmlText: string): CoverageMetrics {
+export function parseJacocoXml(xmlText: string): CoverageMetrics {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xmlText, 'application/xml');
 

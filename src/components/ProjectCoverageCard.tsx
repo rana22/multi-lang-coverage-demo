@@ -177,7 +177,7 @@
 
 import React from 'react';
 import { ProjectCoverage } from '../types';
-import MarkdownView from './MarkdownView';
+import XMLView from './XMLView';
 
 interface Props {
   project: ProjectCoverage;
@@ -212,39 +212,13 @@ export const ProjectCoverageCard: React.FC<Props> = ({ project }) => {
     coverage, 
     language, 
     reportUrl, 
-    isMarkdown = false
+    isMarkdown = false,
+    fileType
   } = project;
 
-  if (isMarkdown) {
-    console.log(reportUrl);
-    return (
-      <>
-        from markdown
-        <MarkdownView url={reportUrl} /> 
-      </>
-    )
-  }
   const overall = coverage.lines;
-  console.log(isMarkdown)
   const hasNumericCoverage = typeof overall === 'number';
   const overallColor = hasNumericCoverage ? getColor(overall!) : '#6b7280';
-
-  if (isMarkdown) {
-    return (
-      <article
-        style={{
-          borderRadius: 12,
-          padding: 20,
-          background: 'white',
-          border: '1px solid rgba(148,163,184,0.35)',
-          boxShadow: '0 8px 20px rgba(15,23,42,0.04)',
-          transition: 'transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease',
-        }}
-      >
-        <MarkdownView url={reportUrl} />
-      </article>
-    )
-  }
 
   return (
     <article

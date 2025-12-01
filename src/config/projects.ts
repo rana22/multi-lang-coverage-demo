@@ -11,7 +11,7 @@ export const COVERAGE_SOURCES = [
     name: 'Java API Service',
     repo: 'java-app-1',
     language: 'java',
-    url: 'https://raw.githubusercontent.com/rana22/multi-lang-coverage-demo/refs/heads/main/java-app-1/target/site/jacoco/jacoco.html',
+    url: 'https://raw.githubusercontent.com/rana22/multi-lang-coverage-demo/refs/heads/main/java-app-1/target/site/jacoco/jacoco.xml',
     isMarkdown: false,
     fileType: 'xml'
   }

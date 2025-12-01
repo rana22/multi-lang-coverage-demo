@@ -29,17 +29,19 @@
 // export default MarkdownView;
 
 import React, { useEffect, useState } from "react";
+import { parseJacocoXml } from "../utils/jacoco";
+import { CoverageMetrics } from "../types";
 
-interface MarkdownViewProps {
+interface XMLViewProps {
   url: string;   // URL to a JaCoCo HTML report
 }
 
-const MarkdownView: React.FC<MarkdownViewProps> = ({ url }) => {
-  const [htmlContent, setHtmlContent] = useState<string>("");
+const XMLView: React.FC<XMLViewProps> = ({ url }) => {
+  const [converage, setCoverage] = useState<CoverageMetrics>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadHtml() {
+    async function loadXML() {
       try {
         const response = await fetch(url, { cache: "no-store" });
 
@@ -48,8 +50,9 @@ const MarkdownView: React.FC<MarkdownViewProps> = ({ url }) => {
           return;
         }
 
-        const text = await response.text();
-        setHtmlContent(text);
+        const xmlText = await response.text();
+        const cov = parseJacocoXml(xmlText);
+        setCoverage(cov)
       } catch (err) {
         console.error("Error fetching HTML:", err);
       } finally {
@@ -57,7 +60,7 @@ const MarkdownView: React.FC<MarkdownViewProps> = ({ url }) => {
       }
     }
 
-    loadHtml();
+    loadXML();
   }, [url]);
 
   if (loading) {
@@ -65,19 +68,13 @@ const MarkdownView: React.FC<MarkdownViewProps> = ({ url }) => {
   }
 
   return (
-    <div
-      className="jacoco-html-view"
-      style={{
-        padding: "16px",
-        background: "white",
-        borderRadius: "8px",
-        maxWidth: "100%",
-        overflowX: "auto",
-      }}
-      dangerouslySetInnerHTML={{ __html: htmlContent }}
-    />
+    <>
+    {
+      JSON.stringify(converage)
+    }
+    </>
   );
 };
 
-export default MarkdownView;
+export default XMLView;
 
