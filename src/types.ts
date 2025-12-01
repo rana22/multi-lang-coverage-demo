@@ -1,8 +1,8 @@
 export interface CoverageMetrics {
-  lines: number;
-  statements: number;
-  branches: number;
-  functions: number;
+  lines?: number;
+  statements?: number;
+  branches?: number;
+  functions?: number;
 }
 
 export interface ProjectCoverage {
