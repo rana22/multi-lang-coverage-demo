@@ -14,5 +14,13 @@ export const COVERAGE_SOURCES = [
     url: 'https://raw.githubusercontent.com/rana22/multi-lang-coverage-demo/refs/heads/main/java-app-1/target/site/jacoco/jacoco.xml',
     isMarkdown: false,
     fileType: 'xml'
-  }
+  },
+  {
+    id: 'python-coverage-demo',
+    name: 'Python Coverage Demo',
+    repo: 'python-coverage-demo',
+    language: 'python',
+    url: 'https://raw.githubusercontent.com/rana22/multi-lang-coverage-demo/refs/heads/main/python-coverage-demo/coverage.json',
+    format: 'coverage-py-json' as const,
+  },
 ];

@@ -2,6 +2,7 @@ import React from 'react';
 import { COVERAGE_SOURCES } from './config/projects';
 import { ProjectCoverageCard } from './components/ProjectCoverageCard';
 import { parseJacocoXml } from './utils/jacoco';
+import { parseCoveragePyJson } from './utils/python';
 
 export interface CoverageMetrics {
   lines?: number;
@@ -36,6 +37,22 @@ const App: React.FC = () => {
 
         for (const src of COVERAGE_SOURCES) {
           try {
+            if (src?.language === 'python') {
+              const res = await fetch(src.url, { cache: 'no-store' });
+              if (!res.ok) throw new Error(`coverage.py JSON fetch failed: ${res.status}`);
+              const data = await res.json();
+              const cov = parseCoveragePyJson(data);
+              results.push({
+                projectId: src.id,
+                name: src.name,
+                repo: src.repo,
+                language: src.language ?? 'python',
+                reportUrl: src.url,
+                coverage: cov,
+              });
+              continue;
+            }
+
             if(src?.fileType === 'xml') {
               const res = await fetch(src.url, { cache: 'no-store' });
               if (!res.ok) {
